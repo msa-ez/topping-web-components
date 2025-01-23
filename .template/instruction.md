@@ -57,7 +57,7 @@ After modifying the component name, npm run build and npm run start again.
 To use Web Components built from other projects or HTML files, load the components through the &lt;script&gt; tag.
 
 - Add the required libraries, such as Vuetify, Vue.js, to the &lt;head&gt; tag.
-- Add the built Web Components file as &lt;script&gt;.
+- Add files of built Web Components within the &lt;body&gt; tag as &lt;script&gt;.
 
 ```
 <head>
@@ -79,7 +79,7 @@ To use Web Components built from other projects or HTML files, load the componen
 Built Web Components can be used like HTML tags. Below is an example of using Web Components.
 
 ```
-<component-name :data="`{name: 'test'}`" :componentName="'Home"></component-name>
+<component-name :data="`{name: 'test'}`" :componentName="'Home'"></component-name>
 ```
 
 - The "data" property allows JSON data to be transferred in the form of a string.

@@ -79,9 +79,21 @@ To use Web Components built from other projects or HTML files, load the componen
 Built Web Components can be used like HTML tags. Below is an example of using Web Components.
 
 ```
-<component-name :data="`{name: 'test'}`" :componentName="'Home'"></component-name>
+<component-name>
+    <component-name-defined-in-vue-instance></component-name-defined-in-vue-instance>
+</component-name>
+
+
+-- Example of Use
+<review-app>
+    <review-detail :id="1" :value="`{id: 1, rating: 5, content: "Very Good"}`"></review-detail>
+<review-app>
+
+// "review-detail" is a globally registered component in a Vue instance defined as a web components
+import ReviewDetail from './components/review-detail'
+Vue.component("review-detail", ReviewDetail)
 ```
 
-- The "data" property allows JSON data to be transferred in the form of a string.
-- The "componentName" property lets you pass on the component name to which you want to bind dynamically.
-- It is delivered to the props of the Vue, and the data is available inside the Web Component.
+- Create a component name that you will actually use inside the web components tag.
+- The component name that you want to use must be created in a kebab-case as a component defined in the Vue instance.
+- Data can be passed to the props as if the child component is called within the Vue component, and if the type to be passed is JSON object, string it and deliver it.

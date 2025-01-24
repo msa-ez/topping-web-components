@@ -3,7 +3,6 @@ fileName: web-component.js
 path: frontend/src
 ---
 import Vue from 'vue';
-import App from "./CustomApp.vue";
 import Managing from "./components";
 import Vuetify from "vuetify/lib";
 import 'vuetify/dist/vuetify.min.css';
@@ -46,33 +45,34 @@ class WebComponentElement extends HTMLElement {
         this.vueInstance = null;
     }
 
-    static get observedAttributes() {
-        return ['data', 'componentName'];
-    }
-    
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (this.vueInstance) {
-            if (newValue || oldValue !== newValue) {
-                this.vueInstance.$props[name] = newValue;
-            }
-        }
-    }
-
     connectedCallback() {
-        const data = this.getAttribute('data') || null;
-        const parsedData = JSON.parse(data);
-        const componentName = this.getAttribute('componentName');
+        var slotContent = "";
+        const props = {};
+        if (this.childNodes.length > 0) {
+            this.childNodes.forEach((child) => {
+                const componentName = child.nodeName.toLowerCase();
+                slotContent += `<${componentName} v-bind="props"></${componentName}>`;
+                if (child.attributes) {
+                    Array.from(child.attributes).forEach(attr => {
+                        try {
+                            props[attr.name] = JSON.parse(attr.value);
+                        } catch (e) {
+                            props[attr.name] = attr.value;
+                        }
+                    })
+                }
+            })
+        }
 
         this.vueInstance = new Vue({
             vuetify,
-            render: (h) => h(App, {
-                props: {
-                    data: parsedData,
-                    componentName: componentName
-                }
-            }),
+            data() {
+                return { props };
+            },
+            template: `<div>${slotContent}</div>`,
         }).$mount();
 
+        this.innerHTML = '';
         this.appendChild(this.vueInstance.$el);
     }
 

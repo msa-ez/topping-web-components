@@ -80,14 +80,28 @@ Built Web Components can be used like HTML tags. Below is an example of using We
 
 ```
 <component-name>
-    <component-name-defined-in-vue-instance></component-name-defined-in-vue-instance>
+    <child-component-name></child-component-name>
 </component-name>
 
 
 -- Example of Use
-<review-app>
-    <review-detail :id="1" :value="`{id: 1, rating: 5, content: "Very Good"}`"></review-detail>
-<review-app>
+<template>
+    <review-app>
+        <!-- The JSON Object must be converted to a string using JSON.stringify() -->
+        <review-detail :value="JSON.stringify(reviewData)" edit-mode="true"></review-detail>
+    <review-app>
+</template>
+
+<script>
+/** ... existing code ... */
+    data: () => ({
+        reviewData: {
+            'rating': 5,
+            'content': 'Very Good'
+        }
+    })
+/** ... existing code ... */
+<script>
 
 // "review-detail" is a globally registered component in a Vue instance defined as a web components
 import ReviewDetail from './components/review-detail'
@@ -96,4 +110,5 @@ Vue.component("review-detail", ReviewDetail)
 
 - Create a component name that you will actually use inside the web components tag.
 - The component name that you want to use must be created in a kebab-case as a component defined in the Vue instance.
-- Data can be passed to the props as if the child component is called within the Vue component, and if the type to be passed is JSON object, string it and deliver it.
+- Data can be passed to the props as if the child component is called within the Vue component, and if the type you want to pass is JSON object, you must convert it into a string and pass it.
+

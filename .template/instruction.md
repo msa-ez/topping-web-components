@@ -110,5 +110,5 @@ Vue.component("review-detail", ReviewDetail)
 
 - Create a component name that you will actually use inside the web components tag.
 - The component name that you want to use must be created in a kebab-case as a component defined in the Vue instance.
-- Data can be passed to the props as if the child component is called within the Vue component, and if the type you want to pass is JSON object, you must convert it into a string and pass it.
-
+- Props can be passed by calling child components within the Vue component.
+- If the prop type you want to deliver is JSON Object or Javascript Object, you must convert it to a string and deliver it.

@@ -69,7 +69,7 @@ class WebComponentElement extends HTMLElement {
             data() {
                 return { props };
             },
-            template: `<div>${slotContent}</div>`,
+            template: `${slotContent}`,
         }).$mount();
 
         this.innerHTML = '';

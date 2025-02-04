@@ -87,7 +87,7 @@ Built Web Components can be used like HTML tags. Below is an example of using We
 -- Example of Use
 <template>
     <review-app>
-        <!-- The JSON Object must be converted to a string using JSON.stringify() -->
+        <!-- The JSON Object or Javascript Object must be converted to a string using JSON.stringify() -->
         <review-detail :value="JSON.stringify(reviewData)" edit-mode="true"></review-detail>
     <review-app>
 </template>

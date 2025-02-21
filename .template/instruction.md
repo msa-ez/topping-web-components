@@ -1,4 +1,4 @@
-## Web Component
+## Create a Web Component based on Vue.js 2 + Vuetify
 Create a reusable custom element and use it wherever you want.
 
 ### How to create web components
@@ -18,7 +18,7 @@ If you want to rename a web components, modify component-name in the following f
   },
 
 
--- vue-config.js
+-- vue.config.js
   /** ... existing code ... */
   configureWebpack: {
     output: {
@@ -101,7 +101,7 @@ Built Web Components can be used like HTML tags. Below is an example of using We
         }
     })
 /** ... existing code ... */
-<script>
+</script>
 
 // "review-detail" is a globally registered component in a Vue instance defined as a web components
 import ReviewDetail from './components/review-detail'
